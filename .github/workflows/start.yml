@@ -16,6 +16,7 @@ jobs:
           if [[ ${{ github.event_name }} == "push" && ${{ github.ref }} =~ ^refs/heads/prod$ ]]
           then
             echo "envname=prod" >> $GITHUB_OUTPUT
+            echo "ghenv=prod" >> $GITHUB_OUTPUT
           else
             echo "envname=dev" >> $GITHUB_OUTPUT
           fi
@@ -29,3 +30,4 @@ jobs:
     uses: ./.github/workflows/child.yml
     with:
       envname: ${{ needs.Setup.outputs.envname }}
+      ghenv: ${{ needs.Setup.outputs.ghenv }}

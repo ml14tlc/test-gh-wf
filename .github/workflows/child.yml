@@ -5,9 +5,12 @@ on:
       envname:
         required: true
         type: string
+      ghenv:
+        required: true
+        type: string
 jobs:
   Print:
-    environment: ${{ inputs.envname }}
+    environment: ${{ inputs.ghenv }}
     runs-on: ubuntu-latest
     steps:
       - name: Print
