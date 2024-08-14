@@ -13,4 +13,4 @@ jobs:
       - name: Print
         run: |
           echo the child envname is ${{ inputs.envname }}
-          echo child var is: ${CHILDVAR}.
+          echo child var is: ${{ vars.CHILDVAR }}.
