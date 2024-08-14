@@ -1,0 +1,15 @@
+name: Child workflow
+on:
+  workflow_call:
+    inputs:
+      envname:
+        required: true
+        type: string
+jobs:
+  Print:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print
+        run: |
+          echo the child envname is ${{ inputs.envname }}
+          echo child var is: ${CHILDVAR}.

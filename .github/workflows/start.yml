@@ -1,0 +1,32 @@
+name: Start workflow
+on:
+  push:
+    branches:
+      - prod
+      - dev
+jobs:
+  Setup:
+    runs-on: ubuntu-latest
+    outputs:
+      envname: ${{ steps.runtime-params.outputs.envname }}
+    steps:
+      - name: Set params
+        id: runtime-params
+        run: |
+          if [[ ${{ github.event_name }} == "push" && ${{ github.ref }} =~ ^refs/heads/prod$ ]]
+          then
+            echo "envname=prod" >> $GITHUB_OUTPUT
+          else
+            echo "envname=dev" >> $GITHUB_OUTPUT
+          fi
+      - name: Check
+        id: check-runtime-params
+        run: |
+          echo the envname is ${{ steps.runtime-params.outputs.envname }}
+  Child:
+    needs:
+      - Setup
+    uses: ./.github/workflows/child.yml
+    with:
+      envname: ${{ needs.Setup.outputs.envname }}
+
