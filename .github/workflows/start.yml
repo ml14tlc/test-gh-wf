@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       envname: ${{ steps.runtime-params.outputs.envname }}
+      ghenv: ${{ steps.runtime-params.outputs.ghenv }}
     steps:
       - name: Set params
         id: runtime-params
