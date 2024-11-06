@@ -1,0 +1,23 @@
+name: OnDemand workflow
+on:
+  workflow_dispatch:
+    inputs:
+      envname:
+        required: true
+        type: string
+      ghenv:
+        required: true
+        type: string
+jobs:
+  Setup:
+    runs-on: ubuntu-latest
+  steps:
+      - name: Check
+        id: check-runtime-params
+        run: |
+          echo the envname is ${{ steps.runtime-params.outputs.envname }}
+  callChild:
+    uses: ./.github/workflows/child.yml
+    with:
+      envname: ${{ inputs.envname }}
+      ghenv: ${{ inputs.ghenv }}
