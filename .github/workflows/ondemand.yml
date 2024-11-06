@@ -8,6 +8,7 @@ on:
       ghenv:
         required: true
         type: string
+        default: dev
 jobs:
   Setup:
     runs-on: ubuntu-latest
